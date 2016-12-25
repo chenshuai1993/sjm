@@ -1,0 +1,18 @@
+{
+  "require": {
+    "altorouter/altorouter": "^1.2",
+    "lox/pheasant": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    }
+  },
+  "minimum-stability": "dev",
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}

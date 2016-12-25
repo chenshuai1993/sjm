@@ -1,0 +1,80 @@
+{include "../layouts/layout.latte"}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class=".text-center">我的mvc框架</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="col-lg-12">
+                <input type="text" class="col-lg-8" id="title" placeholder="请输入标题" />
+                <span class="col-lg-4"><button id="add" class="btn btn-primary btn-sm">添加</button></span>
+            </div>
+
+            <div class="col-lg-12">
+                <ul n:if="$items">
+                    {foreach $items as $item}
+                        <li id="{$item->id}">
+                            <span class="col-lg-8">{$item->title}</span>
+                            <button  class="btn btn-primary btn-sm {$item->status == false ? btn-success}">完成</button>
+                            <button id="del" class="btn btn-danger btn-sm">删除</button></li>
+                    {/foreach}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $("#add").click(function(){
+            var title = $('#title').val();
+            $.ajax({
+                type:'post',
+                url:'/home/add',
+                data:{'title':title},
+                cache: false,
+                success:function(data){
+                    console.log(data);
+                }
+
+            });
+        });
+
+
+        $(".btn-primary").click(function(){
+            var id = $(this).parent('li').attr('id');
+            $.ajax({
+                type:'post',
+                url:'/home/submit',
+                data:{'id':id},
+                cache: false,
+                success:function(data){
+                    console.log(data);
+                }
+
+            });
+        });
+
+        $(".btn-danger").click(function(){
+            var id = $(this).parent('li').attr('id');
+            $.ajax({
+                type:'post',
+                url:'/home/del',
+                data:{'id':id},
+                cache: false,
+                success:function(data){
+                    console.log(data);
+                }
+
+            });
+        });
+
+
+
+    })
+
+</script>
+
